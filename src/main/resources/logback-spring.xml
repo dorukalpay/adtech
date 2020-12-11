@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true">
+    <jmxConfigurator/>
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+
+    <logger name="org.springframework.web" level="INFO"/>
+    <logger name="org.springframework.data" level="INFO"/>
+    <logger name="com.swaarm.adtech" level="DEBUG"/>
+    <logger name="org.hibernate.SQL" level="DEBUG"/>
+
+</configuration>

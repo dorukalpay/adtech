@@ -1,0 +1,40 @@
+version: "3"
+services:
+  postgres-container:
+    image: postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - ./src/main/resources/db/V1_001__create_schema.sql:/docker-entrypoint-initdb.d/V1_001__create_schema.sql
+      - ./src/main/resources/db/V1_002__create_tables.sql:/docker-entrypoint-initdb.d/V1_002__create_tables.sql
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+
+  rabbitmq-container:
+    image: rabbitmq:3-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+
+  ad-tech-container:
+    container_name: ad-tech
+    image: ad-tech:latest
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-container:5432/postgres?currentSchema=swaarm
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+      - SPRING_RABBITMQ_HOST=rabbitmq-container
+    ports:
+      - 8080:8080
+    depends_on:
+      - postgres-container
+      - rabbitmq-container
+
+
+
+

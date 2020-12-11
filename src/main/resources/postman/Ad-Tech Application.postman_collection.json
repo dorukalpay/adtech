@@ -1,0 +1,152 @@
+{
+	"info": {
+		"_postman_id": "9ab1c158-e5c2-4e0d-af42-421c8e94e2b5",
+		"name": "Ad-Tech Application",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Advertisement",
+			"item": [
+				{
+					"name": "Create Delivery Advirtesement Record",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"advertisementId\": 1000,\n    \"deliveryId\": \"244cf0db-ba28-4c5f-8c9c-2bf11ee42980\",\n    \"time\": \"2018-01-07T18:32:23.602300+0000\",\n    \"browser\": \"CHROME\",\n    \"os\": \"IOS\",\n    \"site\": \"http://super-dooper-news.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/ads/delivery",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ads",
+								"delivery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Click Advirtesement Record",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"deliveryId\": \"244cf0db-ba28-4c5f-8c9c-2bf11ee42980\",\n    \"clickId\": \"fff54b83-49ff-476f-8bfb-2ec22b252c30\",\n    \"time\": \"2018-01-07T18:32:34.201100+0000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/ads/click",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ads",
+								"click"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Install Advirtesement Record",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"clickId\": \"fff54b83-49ff-476f-8bfb-2ec22b252c30\",\n    \"installId\": \"144cf0db-ba28-4c5f-8c9c-2bf11ee42980\",\n    \"time\": \"2018-01-07T18:32:34.201100+0000\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/ads/install",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ads",
+								"install"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Advertisement Statistics",
+			"item": [
+				{
+					"name": "List All Statistics Between Dates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ads/statistics/time/2018-01-06T18:32:24+0000/2018-01-10T18:20:00+0000/overall",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ads",
+								"statistics",
+								"time",
+								"2018-01-06T18:32:24+0000",
+								"2018-01-10T18:20:00+0000",
+								"overall"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List All Statistics By Categories Between Dates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/ads/statistics/time/2018-01-06T18:32:24+0000/2018-01-10T18:20:00+0000?fields=BROWSER,OS",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"ads",
+								"statistics",
+								"time",
+								"2018-01-06T18:32:24+0000",
+								"2018-01-10T18:20:00+0000"
+							],
+							"query": [
+								{
+									"key": "fields",
+									"value": "BROWSER,OS"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

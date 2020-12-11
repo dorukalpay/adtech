@@ -1,0 +1,53 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: Ad-Tech Service
+  datasource:
+    hikari:
+      connection-timeout: 10000
+      maximum-pool-size: 10
+      minimum-idle: 1
+      idle-timeout: 10000
+    type: com.zaxxer.hikari.HikariDataSource
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres?currentSchema=swaarm
+    username: postgres
+    password: postgres
+  sleuth:
+    sampler:
+      percentage: 1.0
+  jpa:
+    hibernate:
+      ddl-auto: none
+  cloud:
+    stream:
+      bindings:
+        data-count-producer:
+          destination: ad_tech_events
+          group: update_data_count
+        data-count-consumer:
+          destination: ad_tech_events
+          group: update_data_count
+          consumer:
+            max-attempts: 1
+            concurrency: 5
+      rabbit:
+        bindings:
+          data-count-consumer:
+            consumer:
+              autoBindDlq: true
+              dlqTtl: 300000
+              dlqDeadLetterExchange:
+          default:
+            contentType: application/json
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+
+
+
